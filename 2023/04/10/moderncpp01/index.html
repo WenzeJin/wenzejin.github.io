@@ -16,22 +16,23 @@
   <meta name="author" content="Wenze Jin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="第一篇文章Hi，这里是Wenze Jin的个人技术博客。 这里将用来分享一些学习笔记与技术性的内容，同时也会分享一些关于当下科技热点的观点。 如果有技术性的问题欢迎交流👏  我的 Github: https:&#x2F;&#x2F;github.com&#x2F;WenzeJin  由于本人学识疏浅，专业问题上如有疏漏，还请各位斧正。">
+    <meta name="description" content="Modern C++ (1)  for &lt;range&gt; LoopIn traditional C++, we define a counter variable (in most cases int&#x2F;unsigned i) to count how many loops we have done for a container (Array, Vector, etc.). In mod">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第一篇文章">
-<meta property="og:url" content="http://wenzejin.github.io/2023/04/05/first-post/index.html">
+<meta property="og:title" content="Modern C++(1) for range loop">
+<meta property="og:url" content="http://wenzejin.github.io/2023/04/10/moderncpp01/index.html">
 <meta property="og:site_name" content="WenzeJin 的个人技术博客">
-<meta property="og:description" content="第一篇文章Hi，这里是Wenze Jin的个人技术博客。 这里将用来分享一些学习笔记与技术性的内容，同时也会分享一些关于当下科技热点的观点。 如果有技术性的问题欢迎交流👏  我的 Github: https:&#x2F;&#x2F;github.com&#x2F;WenzeJin  由于本人学识疏浅，专业问题上如有疏漏，还请各位斧正。">
+<meta property="og:description" content="Modern C++ (1)  for &lt;range&gt; LoopIn traditional C++, we define a counter variable (in most cases int&#x2F;unsigned i) to count how many loops we have done for a container (Array, Vector, etc.). In mod">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-04T20:08:09.000Z">
-<meta property="article:modified_time" content="2023-04-04T12:21:56.108Z">
+<meta property="article:published_time" content="2023-04-09T17:17:10.000Z">
+<meta property="article:modified_time" content="2023-04-09T09:17:19.351Z">
 <meta property="article:author" content="Wenze Jin">
-<meta property="article:tag" content="杂项">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Iterator">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>第一篇文章 - WenzeJin 的个人技术博客</title>
+  <title>Modern C++(1) for range loop - WenzeJin 的个人技术博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -212,7 +213,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="第一篇文章"></span>
+            <span id="subtitle" data-typed-text="Modern C++(1) for range loop"></span>
           
         </div>
 
@@ -223,8 +224,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-04 20:08" pubdate>
-          2023年4月4日 晚上
+        <time datetime="2023-04-09 17:17" pubdate>
+          2023年4月9日 下午
         </time>
       </span>
     
@@ -235,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          145 字
+          2.3k 字
         
       </span>
     
@@ -246,7 +247,7 @@
         
         
         
-          1 分钟
+          12 分钟
         
       </span>
     
@@ -284,18 +285,39 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">第一篇文章</h1>
+            <h1 style="display: none">Modern C++(1) for range loop</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="第一篇文章"><a href="#第一篇文章" class="headerlink" title="第一篇文章"></a>第一篇文章</h1><p>Hi，这里是Wenze Jin的个人技术博客。</p>
-<p>这里将用来分享一些学习笔记与技术性的内容，同时也会分享一些关于当下科技热点的观点。</p>
-<p>如果有技术性的问题欢迎交流👏</p>
+                <h1 id="Modern-C-1-for-lt-range-gt-Loop"><a href="#Modern-C-1-for-lt-range-gt-Loop" class="headerlink" title="Modern C++ (1)  for &lt;range&gt; Loop"></a>Modern C++ (1)  <code>for &lt;range&gt;</code> Loop</h1><p>In traditional C++, we define a counter variable (in most cases <code>int/unsigned i</code>) to count how many loops we have done for a container (Array, Vector, etc.).</p>
+<p>In modern C++, we can use range based for loop to simplify the syntax and executes <code>statement</code> repeatedly and sequentially for each element in <code>expression</code>.</p>
+<p>If you are experienced in Python, you maybe familiar with this syntax and usage for <code>Iterable item</code> in Python.</p>
+<h2 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">for</span> (&lt;<span class="hljs-keyword">for</span>-range-declaration&gt; : &lt;expression&gt;)<br>    &lt;statement&gt;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Implement"><a href="#Implement" class="headerlink" title="Implement"></a>Implement</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs C++"> &#123;<br>    <span class="hljs-keyword">auto</span> &amp;&amp; __range = expression ;<br>    <span class="hljs-keyword">auto</span> __begin = begin_expr ;	<span class="hljs-comment">//get *.begin()</span><br>    <span class="hljs-keyword">auto</span> __end = end_expr ;		<span class="hljs-comment">//get *.end()</span><br>    <span class="hljs-keyword">for</span> ( ; __begin != __end; ++__begin) &#123;	<span class="hljs-comment">//traditional for loop</span><br>        <span class="hljs-keyword">for</span>-range-declaration = *__begin;<br>        statement;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Different-Usage"><a href="#Different-Usage" class="headerlink" title="Different Usage"></a>Different Usage</h2><p>The code below shows different usage of range-based <code>for</code> loops to iterate through a container.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;vector&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> arr[<span class="hljs-number">10</span>] = &#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>&#125;;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> each : arr)&#123;	<span class="hljs-comment">//Access by using a copy of each element.</span><br>        &lt;statement&gt;<br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> each : arr)&#123;	<span class="hljs-comment">//Use to auto to cause type inference. Simpler and Stabler</span><br>        &lt;statement&gt;<br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> &amp;each : arr)&#123;	<span class="hljs-comment">//Access by using reference.</span><br>        					<span class="hljs-comment">//Observe and modify each element in-place;</span><br>        &lt;statement&gt;<br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> &amp;each : arr)&#123;	<span class="hljs-comment">//Observation only.</span><br>        &lt;statement&gt;<br>    &#125;<br>    <br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">vec</span><span class="hljs-params">(<span class="hljs-number">10</span>)</span></span>;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10l</span> i++)&#123;<br>        vec.<span class="hljs-built_in">push_back</span>(i);<br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> &amp;each : vec)&#123;<br>        &lt;statement&gt;<br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> &amp;each : vec)&#123;<br>        &lt;statement&gt;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Remarks"><a href="#Remarks" class="headerlink" title="Remarks"></a>Remarks</h2><ol>
+<li><p><strong>Which date structure &#x2F; class is iterable in C++?</strong></p>
+<ol>
+<li>Based-in arrays.</li>
+<li>Some STL containers such as, <code>vector</code> , <code>list</code> etc.</li>
+<li>Any user-defined container class meeting these requirements: (You can conclude this from implement of range-based for loop)<ol>
+<li>Have <code>.begin()</code> and <code>.end()</code>, they return a iterator-like class meeting requirements below:</li>
+<li>Operator <code>++(prefix)</code> <code>*</code> <code>=</code> <code>!=</code> is correctly overriden.</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p><strong>Cite from <em>Microsoft Documents for Modern C++</em></strong></p>
 <blockquote>
-<p>我的 Github: <a><a target="_blank" rel="noopener" href="https://github.com/WenzeJin">https://github.com/WenzeJin</a></a></p>
+<p>Use the range-based <strong><code>for</code></strong> statement to construct loops that must execute through a <em>range</em>, which is defined as anything that you can iterate through—for example, <code>std::vector</code>, or any other C++ Standard Library sequence whose range is defined by a <code>begin()</code> and <code>end()</code>. The name that is declared in the <code>for-range-declaration</code> portion is local to the <strong><code>for</code></strong> statement and cannot be re-declared in <code>expression</code> or <code>statement</code>. Note that the <a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/cpp/cpp/auto-cpp?view=msvc-170"><code>auto</code></a> keyword is preferred in the <code>for-range-declaration</code> portion of the statement.</p>
 </blockquote>
-<p>由于本人学识疏浅，专业问题上如有疏漏，还请各位斧正。</p>
+</li>
+</ol>
 
                 
               </div>
@@ -304,32 +326,13 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%9D%82%E9%A1%B9/" class="category-chain-item">杂项</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%9D%82%E9%A1%B9/">#杂项</a>
+        <a href="/tags/C/">#C++</a>
+      
+        <a href="/tags/Iterator/">#Iterator</a>
       
     </div>
   
@@ -341,8 +344,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>第一篇文章</div>
-      <div>http://wenzejin.github.io/2023/04/05/first-post/</div>
+      <div>Modern C++(1) for range loop</div>
+      <div>http://wenzejin.github.io/2023/04/10/moderncpp01/</div>
     </div>
     <div class="license-meta">
       
@@ -354,7 +357,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月4日</div>
+          <div>2023年4月9日</div>
         </div>
       
       
@@ -392,15 +395,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/05/python-Ycombination/" title="关于python中Y组合子的问题讨论（补档）">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">关于python中Y组合子的问题讨论（补档）</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2023/04/05/circularqueue/" title="循环队列：解决数组实现队列的效率问题">
+                        <span class="hidden-mobile">循环队列：解决数组实现队列的效率问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
