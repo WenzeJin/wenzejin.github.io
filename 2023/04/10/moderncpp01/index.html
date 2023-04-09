@@ -16,15 +16,15 @@
   <meta name="author" content="Wenze Jin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Modern C++ (1)  for &lt;range&gt; LoopIn traditional C++, we define a counter variable (in most cases int&#x2F;unsigned i) to count how many loops we have done for a container (Array, Vector, etc.). In mod">
+    <meta name="description" content="Modern C++ (1)  Range-based For LoopIn traditional C++, we define a counter variable (in most cases int&#x2F;unsigned i) to count how many loops we have done for a container (Array, Vector, etc.). In moder">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Modern C++(1) for range loop">
+<meta property="og:title" content="Modern C++(1) Range-based For Loop">
 <meta property="og:url" content="http://wenzejin.github.io/2023/04/10/moderncpp01/index.html">
 <meta property="og:site_name" content="WenzeJin 的个人技术博客">
-<meta property="og:description" content="Modern C++ (1)  for &lt;range&gt; LoopIn traditional C++, we define a counter variable (in most cases int&#x2F;unsigned i) to count how many loops we have done for a container (Array, Vector, etc.). In mod">
+<meta property="og:description" content="Modern C++ (1)  Range-based For LoopIn traditional C++, we define a counter variable (in most cases int&#x2F;unsigned i) to count how many loops we have done for a container (Array, Vector, etc.). In moder">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-09T17:17:10.000Z">
-<meta property="article:modified_time" content="2023-04-09T09:24:28.339Z">
+<meta property="article:modified_time" content="2023-04-09T09:46:02.278Z">
 <meta property="article:author" content="Wenze Jin">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="Iterator">
@@ -32,7 +32,7 @@
   
   
   
-  <title>Modern C++(1) for range loop - WenzeJin 的个人技术博客</title>
+  <title>Modern C++(1) Range-based For Loop - WenzeJin 的个人技术博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Modern C++(1) for range loop"></span>
+            <span id="subtitle" data-typed-text="Modern C++(1) Range-based For Loop"></span>
           
         </div>
 
@@ -285,12 +285,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Modern C++(1) for range loop</h1>
+            <h1 style="display: none">Modern C++(1) Range-based For Loop</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Modern-C-1-for-lt-range-gt-Loop"><a href="#Modern-C-1-for-lt-range-gt-Loop" class="headerlink" title="Modern C++ (1)  for &lt;range&gt; Loop"></a>Modern C++ (1)  <code>for &lt;range&gt;</code> Loop</h1><p>In traditional C++, we define a counter variable (in most cases <code>int/unsigned i</code>) to count how many loops we have done for a container (Array, Vector, etc.).</p>
+                <h1 id="Modern-C-1-Range-based-For-Loop"><a href="#Modern-C-1-Range-based-For-Loop" class="headerlink" title="Modern C++ (1)  Range-based For Loop"></a>Modern C++ (1)  Range-based For Loop</h1><p>In traditional C++, we define a counter variable (in most cases <code>int/unsigned i</code>) to count how many loops we have done for a container (Array, Vector, etc.).</p>
 <p>In modern C++, we can use range based for loop to simplify the syntax and executes <code>statement</code> repeatedly and sequentially for each element in <code>expression</code>.</p>
 <p>If you are experienced in Python, you maybe familiar with this syntax and usage for <code>Iterable item</code> in Python.</p>
 <h2 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">for</span> (&lt;<span class="hljs-keyword">for</span>-range-declaration&gt; : &lt;expression&gt;)<br>    &lt;statement&gt;<br></code></pre></td></tr></table></figure>
@@ -301,7 +301,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;vector&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> arr[<span class="hljs-number">10</span>] = &#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>&#125;;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> each : arr)&#123;	<span class="hljs-comment">//Access by using a copy of each element.</span><br>        &lt;statement&gt;<br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> each : arr)&#123;	<span class="hljs-comment">//Use to auto to cause type inference. Simpler and Stabler</span><br>        &lt;statement&gt;<br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> &amp;each : arr)&#123;	<span class="hljs-comment">//Access by using reference.</span><br>        					<span class="hljs-comment">//Observe and modify each element in-place;</span><br>        &lt;statement&gt;<br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> &amp;each : arr)&#123;	<span class="hljs-comment">//Observation only.</span><br>        &lt;statement&gt;<br>    &#125;<br>    <br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">vec</span><span class="hljs-params">(<span class="hljs-number">10</span>)</span></span>;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10l</span> i++)&#123;<br>        vec.<span class="hljs-built_in">push_back</span>(i);<br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> &amp;each : vec)&#123;<br>        &lt;statement&gt;<br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> &amp;each : vec)&#123;<br>        &lt;statement&gt;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h2 id="Remarks"><a href="#Remarks" class="headerlink" title="Remarks"></a>Remarks</h2><ol>
-<li><p><strong>Which date structure &#x2F; class is iterable in C++?</strong></p>
+<li><p><strong>Which data structure &#x2F; class is iterable in C++?</strong></p>
 <ol>
 <li>Based-in arrays.</li>
 <li>Some STL containers such as, <code>vector</code> , <code>list</code> etc.</li>
@@ -365,7 +365,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Modern C++(1) for range loop</div>
+      <div>Modern C++(1) Range-based For Loop</div>
       <div>http://wenzejin.github.io/2023/04/10/moderncpp01/</div>
     </div>
     <div class="license-meta">
@@ -441,7 +441,7 @@
     Fluid.utils.loadComments('#valine', function() {
       Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
         var options = Object.assign(
-          {"appId":"vzSYNrCZ6fojrra7up1VB3cE-gzGzoHsz","appKey":"iZpxh83JVNzk7tM1kQwE8Zpi","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {"appId":"vzSYNrCZ6fojrra7up1VB3cE-gzGzoHsz","appKey":"iZpxh83JVNzk7tM1kQwE8Zpi","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail"],"requiredFields":[],"pageSize":5,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
           {
             el: "#valine",
             path: window.location.pathname
