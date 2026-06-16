@@ -3,78 +3,427 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to Wenze Jin's homepage.</title>
+  <title>Wenze Jin — Personal Homepage</title>
 
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google Fonts: Inter (body) + Lora (headings) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <style>
+    /* ============================================================
+       CSS VARIABLES — tweak these to change the entire look
+       ============================================================ */
+    :root {
+      --color-bg:       #ffffff;
+      --color-text:     #2d2d2d;
+      --color-muted:    #6b7280;
+      --color-accent:   #1a56db;
+      --color-accent-light: #e8f0fe;
+      --color-border:   #e5e7eb;
+      --color-card-bg:  #f9fafb;
+      --color-tag-bg:   #eef2ff;
+      --color-tag-text: #4338ca;
+
+      --font-body:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --font-heading:  'Lora', 'Noto Serif SC', 'Songti SC', Georgia, serif;
+
+      --max-width:     880px;
+      --spacing-xs:    0.4rem;
+      --spacing-sm:    0.75rem;
+      --spacing-md:    1.5rem;
+      --spacing-lg:    2.5rem;
+      --spacing-xl:    4rem;
+
+      --radius:        8px;
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--color-text);
+      background: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ============================================================
+       TYPOGRAPHY
+       ============================================================ */
+    h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 600; line-height: 1.3; }
+    h1 { font-size: 2.2rem; letter-spacing: -0.02em; }
+    h2 { font-size: 1.5rem; margin-bottom: var(--spacing-md); }
+    h3 { font-size: 1.15rem; }
+    h4 { font-size: 1rem; }
+
+    a {
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    a:hover { color: #1e40af; text-decoration: underline; }
+
+    p { margin-bottom: var(--spacing-sm); color: var(--color-text); }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      margin: var(--spacing-lg) 0;
+    }
+
+    /* ============================================================
+       LAYOUT
+       ============================================================ */
+    .wrapper {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    .site-header {
+      padding: var(--spacing-xl) 0 var(--spacing-md);
+      text-align: center;
+    }
+    .site-header h1 {
+      margin-bottom: var(--spacing-xs);
+    }
+    .site-header .subtitle {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      color: var(--color-muted);
+      font-style: italic;
+    }
+
+    /* subtle nav links */
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: var(--spacing-sm);
+      font-size: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: var(--color-muted);
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+    .nav-links a:hover { color: var(--color-accent); text-decoration: none; }
+
+    /* ============================================================
+       SECTION: ABOUT (photo + bio)
+       ============================================================ */
+    .about {
+      display: flex;
+      gap: var(--spacing-lg);
+      align-items: flex-start;
+      margin-bottom: var(--spacing-xl);
+    }
+    .about-text { flex: 1; min-width: 0; }
+    .about-text p { font-size: 0.975rem; }
+    .about-photo {
+      flex-shrink: 0;
+      width: 180px;
+    }
+    .about-photo img {
+      width: 100%;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .about-photo img:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+
+    /* ============================================================
+       SECTION: RESEARCH INTERESTS (tags)
+       ============================================================ */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: var(--spacing-sm);
+    }
+    .tag {
+      display: inline-block;
+      background: var(--color-tag-bg);
+      color: var(--color-tag-text);
+      padding: 0.35em 0.85em;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* ============================================================
+       SECTION: CONTACT
+       ============================================================ */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-sm);
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.925rem;
+      line-height: 1.6;
+    }
+    .contact-item .icon {
+      flex-shrink: 0;
+      width: 20px;
+      text-align: center;
+      color: var(--color-accent);
+      margin-top: 1px;
+    }
+    .contact-item .label {
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-muted);
+      margin-bottom: 0.1rem;
+    }
+
+    /* ============================================================
+       SECTION: CARDS (Publications, Awards, etc.)
+       ============================================================ */
+    .card {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: var(--spacing-md) var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+      transition: box-shadow 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+
+    .card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .card li {
+      position: relative;
+      padding-left: 1.2rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .card li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.65em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      opacity: 0.5;
+    }
+    .card li:last-child { margin-bottom: 0; }
+
+    /* highlight badge inside awards */
+    .award-date {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      background: var(--color-accent-light);
+      padding: 0.15em 0.55em;
+      border-radius: 4px;
+      margin-right: 0.4rem;
+      white-space: nowrap;
+    }
+
+    /* empty state */
+    .empty-state {
+      color: var(--color-muted);
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .site-footer {
+      text-align: center;
+      padding: var(--spacing-lg) 0 var(--spacing-xl);
+      color: var(--color-muted);
+      font-size: 0.8rem;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 640px) {
+      :root {
+        --spacing-lg: 1.8rem;
+        --spacing-xl: 2.5rem;
+      }
+      h1 { font-size: 1.7rem; }
+      h2 { font-size: 1.25rem; }
+
+      .about {
+        flex-direction: column-reverse;
+        align-items: center;
+        text-align: center;
+      }
+      .about-photo { width: 140px; }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .contact-item.address { grid-column: span 1; }
+
+      .card { padding: var(--spacing-md); }
+      .card li { padding-left: 1rem; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
-  <div class="container">
-    <div class="row mt-4">
-      <h1>Wenze JIN (金文泽)</h1>
-      <hr>
-    </div>
-  
-    <div class="row mb-4 justify-content-between">
-      <div class="col-md-9">
-        <div class="row mb-4">
-          <h4>Undergraduate Student (Senior)</h4>
-          <p>I am an undergraduated student at the School of Computer Science of Nanjing University, supervised by <a href="https://cs.nju.edu.cn/changxu">Prof. Chang Xu</a>. After my undergraduate studies, I will continue on to a PhD program at Nanjing University. My research interests lies in intelligent software testing and analysis. </p>
-        </div>
-        <div class="row mb-4">
-          <b>Research Interests:</b> <br>
-          intelligent software testing and analysis<br>
-          software quality assurance<br>
-          software engineering<br>
-        </div>
-        <div class="row mb-4">
-          <b> Mailing Address:</b>
-          <ul>
-            <li>Room 409, Building of Computer Science and Technology</li>
-            <li>Nanjing University (Xianlin Campus)</li>
-            <li>163 Xianlin Ave., Qixia District, Nanjing, Jiangsu Province, China</li>
-          </ul>
-        </div>
-        <div class="row mb-4">
-          <b>Email:</b> wenzejin AT smail DOT nju DOT edu DOT cn
-        </div>
-        <div class="row mb-4">
-            <b>My GitHub Homepage:</b> <a href="https://github.com/WenzeJin">Go to my GitHub Homepage</a><br>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <img src="assets/img.jpeg" alt="Wenze Jin" class="img-fluid rounded shadow">
-      </div>
-    </div>
+<div class="wrapper">
 
-    <div class="row mb-4">
-      <div class="card shadow">
-          <div class="card-body">
-              <h2 class="card-title">Awards or Honors</h2>
-              <ul>
-                  <li>2025/10: BYD Scholarship of Nanjing University (南京大学比亚迪奖学金)</li>
-                  <li>2024/10: <b>China National Scholarship (国家奖学金)</b> </li>
-                  <li>2023/12: First Prize in the 2023 Nanjing University People's Scholarship (2023年度南京大学人民奖学金一等奖)</li>
-                  <li>2023/11: National First Prize in the 2023 China Undergraduate Mathematical Contest in Modeling (全国大学生数学建模竞赛全国一等奖)</li>
-                  <li>2023/10: Sun Zhongxiu Scholarship of Nanjing University (南京大学孙钟秀奖学金)</li>
-              </ul>
-          </div>
-      </div>
-    </div>
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="site-header">
+    <h1>Wenze JIN <span style="font-weight:400;font-size:0.7em;color:var(--color-muted);">(金文泽)</span></h1>
+    <p class="subtitle">Ph.D. Student · Nanjing University</p>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#contact">Contact</a>
+      <a href="#publications">Publications</a>
+      <a href="#awards">Awards</a>
+      <a href="assets/cv.pdf">CV</a>
+    </nav>
+  </header>
 
-    <div class="row mb-4 mt-4 justify-content-center">
-      <div class="col-md-auto">
-        <p>Last update: 2026/01/15</p>
+  <!-- ============================================================
+       ABOUT
+       ============================================================ -->
+  <section id="about" class="about">
+    <div class="about-text">
+      <p>
+        I am a Ph.D. student at the <strong>School of Computer Science, Nanjing University</strong>,
+        advised by <a href="https://cs.nju.edu.cn/changxu">Prof. Chang Xu</a>.
+        I received my B.Sc. from Nanjing University in 2026.
+      </p>
+      <p>
+        My research focuses on building intelligent tools that help developers write better software —
+        spanning software testing & analysis, and AI for SE / SE for AI.
+      </p>
+    </div>
+    <div class="about-photo">
+      <img src="assets/img.jpeg" alt="Wenze Jin">
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RESEARCH INTERESTS
+       ============================================================ -->
+  <section id="research">
+    <h2>Research Interests</h2>
+    <div class="tags">
+      <span class="tag">Intelligent Software Testing</span>
+      <span class="tag">Software Quality Assurance</span>
+      <span class="tag">AI for SE / SE for AI</span>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- ============================================================
+       CONTACT
+       ============================================================ -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact-grid">
+      <!-- Mailing Address -->
+      <div class="contact-item address">
+        <span class="icon">📍</span>
+        <div>
+          <div class="label">Address</div>
+          Room 409, Building of Computer Science and Technology<br>
+          Nanjing University (Xianlin Campus)<br>
+          163 Xianlin Ave., Nanjing, China
+        </div>
+      </div>
+      <!-- Email -->
+      <div class="contact-item">
+        <span class="icon">✉️</span>
+        <div>
+          <div class="label">Email</div>
+          wenzejin<span style="display:none">nospam</span>@smail.nju.edu.cn
+        </div>
+      </div>
+      <!-- GitHub -->
+      <div class="contact-item">
+        <span class="icon">🐙</span>
+        <div>
+          <div class="label">GitHub</div>
+          <a href="https://github.com/WenzeJin">github.com/WenzeJin</a>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- ============================================================
+       PUBLICATIONS
+       ============================================================ -->
+  <section id="publications">
+    <h2>Publications</h2>
+    <div class="card">
+      <ul>
+        <!-- Add new publications by copying the <li> template below -->
+        <!-- <li><strong>Paper Title.</strong> Authors. <em>Venue, Year.</em></li> -->
+        <li class="empty-state">Publications coming soon.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       AWARDS
+       ============================================================ -->
+  <section id="awards">
+    <h2>Awards &amp; Honors</h2>
+    <div class="card">
+      <ul>
+        <li><span class="award-date">2026/04</span> 南京大学优秀本科毕业生</li>
+        <li><span class="award-date">2025/10</span> BYD Scholarship of Nanjing University (南京大学比亚迪奖学金)</li>
+        <li><span class="award-date">2024/10</span> <strong>China National Scholarship (国家奖学金)</strong></li>
+        <li><span class="award-date">2023/12</span> First Prize, Nanjing University People's Scholarship</li>
+        <li><span class="award-date">2023/11</span> <strong>National First Prize</strong>, China Undergraduate Mathematical Contest in Modeling</li>
+        <li><span class="award-date">2023/10</span> Sun Zhongxiu Scholarship of Nanjing University (南京大学孙钟秀奖学金)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="site-footer">
+    Last updated: 2026/06/16
+  </footer>
+
+</div><!-- /.wrapper -->
 
 </body>
 </html>
